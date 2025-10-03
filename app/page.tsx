@@ -171,7 +171,7 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.why}>
-            <h3>Why is there a website for this?</h3>
+            <h3>Why did you make a website for this?</h3>
             Because I thought it was a fun idea and my capacity for
             prioritization is limited.
           </div>
