@@ -86,8 +86,8 @@ export default function Home() {
         />
         <div className={styles.description}>
           <h3>What&apos;s this?</h3>
-          <i>Over the Garden Wall</i> is a six-episode miniseries that broadcast
-          on Cartoon Network in 2014. It&apos;s filled with stunning artwork,
+          <i>Over the Garden Wall</i> is a ten-episode miniseries that aired on
+          Cartoon Network in 2014. It&apos;s filled with stunning artwork,
           evocative music, and the strongest autumn vibes ever recorded.
         </div>
         <div className={styles.details}>
