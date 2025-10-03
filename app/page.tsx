@@ -62,7 +62,7 @@ export default function Home() {
           Watch Party
         </div>
         <Image
-          src="https://64.media.tumblr.com/00d3b50461c6284263d59b6c7e320337/fec16913e9b7f111-d0/s540x810/82f59525daf0bb041d2224e75f4f1401c0be3ddb.gif"
+          src="/pumpkin-king.gif"
           width="500"
           height="500"
           alt="PUMPKIN KING"
@@ -119,12 +119,7 @@ export default function Home() {
           <h3>Doot</h3>
           <div>Doot as {nameForDooter}:</div>
           <button onClick={dootCallback} className={styles.dootImageButton}>
-            <Image
-              src="https://static.wikia.nocookie.net/roblox-skittles-nextbots/images/9/9c/Doot.png/revision/latest?cb=20240117095332"
-              width="50"
-              height="50"
-              alt="doot"
-            />
+            <Image src="/doot.png" width="50" height="50" alt="doot" />
           </button>
           <div className={styles.dootLog}>
             <ShowWhenReady
