@@ -92,10 +92,12 @@ export default function Home() {
         </div>
         <div className={styles.details}>
           <h3>Where and when?</h3>
-          Come to our residence at 332 Rogers Ave on{" "}
-          <b>Saturday, October 25th</b> at <b>6:00 PM</b> to begin watching! The
-          whole miniseries is about the length of a movie (~2 hours). Once you
-          arrive, feel free to buzz 062# or just call me.
+          Come to our residence at 332 Rogers Ave on <b>
+            Sunday, October 26th
+          </b>{" "}
+          at <b>5:00 PM</b> to begin watching! The whole miniseries is about the
+          length of a movie (~2 hours). Once you arrive, feel free to buzz 062#
+          or just call me.
         </div>
         <div className={styles.bring}>
           <h3>What should I bring?</h3>
