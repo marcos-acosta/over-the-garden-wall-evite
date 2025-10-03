@@ -1,95 +1,171 @@
+"use client";
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./app.module.css";
+import { getFirestore, collection } from "firebase/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { firebaseApp, logDoot, register } from "./db";
+import { Attendee, Doot } from "./interfaces";
+import { useState } from "react";
+import { formatTime, getLeaderboard } from "./util";
+import ShowWhenReady from "./components/ShowWhenReady";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [name, setName] = useState("");
+  const [attendeesCollection, attendeesLoading, attendeesError] = useCollection(
+    collection(getFirestore(firebaseApp), "attendees"),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    }
+  );
+  const [dootsCollection, dootsLoading, dootsError] = useCollection(
+    collection(getFirestore(firebaseApp), "doots"),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    }
+  );
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const attendees = attendeesCollection?.docs.map(
+    (doc) => doc.data() as Attendee
+  );
+  const doots = dootsCollection?.docs
+    .map((doc) => doc.data() as Doot)
+    .toSorted((a, b) => a.timestamp - b.timestamp);
+
+  const attendeeNamesSet = [
+    ...new Set(attendees?.map((attendee) => attendee.name)),
+  ];
+
+  const loading = attendeesLoading || dootsLoading;
+  const error = attendeesError || dootsError;
+
+  const nameForDooter = name.length > 0 ? name : "anonymous";
+
+  const leaderboard = doots && getLeaderboard(doots);
+
+  const registerCallback = () => {
+    if (name.length > 0) {
+      register(name);
+    }
+  };
+
+  const dootCallback = () => {
+    logDoot(nameForDooter, name.length === 0);
+  };
+
+  return (
+    <div className={styles.appContainer}>
+      <div className={styles.innerContainer}>
+        <div className={styles.titleContainer}>
+          Over the Garden Wall
+          <br />
+          Watch Party
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <Image
+          src="https://64.media.tumblr.com/00d3b50461c6284263d59b6c7e320337/fec16913e9b7f111-d0/s540x810/82f59525daf0bb041d2224e75f4f1401c0be3ddb.gif"
+          width="500"
+          height="500"
+          alt="PUMPKIN KING"
+          className={styles.headerGif}
+        />
+        <div className={styles.description}>
+          <h3>What's this?</h3>
+          <i>Over the Garden Wall</i> is a six-episode miniseries that broadcast
+          on Cartoon Network in 2014. It's filled with stunning artwork,
+          evocative music, and the strongest autumn vibes ever recorded.
+        </div>
+        <div className={styles.details}>
+          <h3>Where and when?</h3>
+          Come to our residence at 332 Rogers Ave on{" "}
+          <b>Saturday, October 25th</b> at <b>6:00 PM</b> to begin watching! The
+          whole miniseries is about the length of a movie (~2 hours). Once you
+          arrive, feel free to buzz 062 or just call me.
+        </div>
+        <div className={styles.bring}>
+          <h3>What should I bring?</h3>
+          Nothing required, but fall snacks are more than welcome! I'll also be
+          preparing some hard spiced apple cider for all to enjoy.
+        </div>
+        <div className={styles.attendees}>
+          <h3>Who's going?</h3>
+          <ShowWhenReady
+            loading={loading}
+            error={Boolean(error)}
+            errorMessage={"couldn't load attendees!"}
+          >
+            <ul>
+              {attendeeNamesSet.map((attendeeName) => (
+                <li key={attendeeName}>{attendeeName} is going!</li>
+              ))}
+            </ul>
+          </ShowWhenReady>
+        </div>
+        <div className={styles.attend}>
+          <h3>Can I come?</h3>
+          Yes!
+          <div className={styles.signUp}>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={styles.nameInput}
+              placeholder="name"
+            />
+            <button onClick={registerCallback} disabled={name.length === 0}>
+              I'm going!
+            </button>
+          </div>
+        </div>
+        <div className={styles.dootContainer}>
+          <h3>Doot</h3>
+          <div>Doot as {nameForDooter}:</div>
+          <button onClick={dootCallback} className={styles.dootImageButton}>
+            <Image
+              src="https://static.wikia.nocookie.net/roblox-skittles-nextbots/images/9/9c/Doot.png/revision/latest?cb=20240117095332"
+              width="50"
+              height="50"
+              alt="doot"
+            />
+          </button>
+          <div className={styles.dootLog}>
+            <ShowWhenReady
+              loading={loading}
+              error={Boolean(error)}
+              errorMessage="couldn't fetch doots!"
+            >
+              <ul>
+                {doots?.toReversed().map((doot) => (
+                  <li key={`${doot.dooter}:${doot.timestamp}`}>
+                    {doot.dooter} dooted at {formatTime(doot.timestamp)}
+                  </li>
+                ))}
+              </ul>
+            </ShowWhenReady>
+          </div>
+          <div className={styles.topDooters}>
+            <h3>Top dooters</h3>
+            <div className={styles.dootLeaderboard}>
+              <ShowWhenReady
+                loading={loading}
+                error={Boolean(error)}
+                errorMessage="couldn't fetch leaderboard!"
+              >
+                <ol>
+                  {leaderboard?.map(([name, doots]) => (
+                    <li key={name}>
+                      {name} ({doots} {doots === 1 ? "doot" : "doots"})
+                    </li>
+                  ))}
+                </ol>
+              </ShowWhenReady>
+            </div>
+          </div>
+          <div className={styles.why}>
+            <h3>Why is there a website for this?</h3>
+            Because I thought it was a fun idea and my capacity for
+            prioritization is limited.
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

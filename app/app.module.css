@@ -1,0 +1,111 @@
+.appContainer {
+  width: 100%;
+  font-family: var(--font-karla);
+}
+
+.headerGif {
+  width: 100%;
+  height: unset;
+  border-radius: 5px;
+}
+
+.innerContainer {
+  width: 650px;
+  max-width: 95%;
+  margin: auto;
+  padding: 40px 0 50px 0;
+}
+
+.titleContainer {
+  font-family: var(--font-amarante);
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.innerContainer h3 {
+  color: var(--accent);
+  margin-top: 10px;
+}
+
+.attendeesContainer {
+  margin-top: 10px;
+}
+
+.loading {
+  font-style: italic;
+}
+
+.errorText {
+  color: var(--red);
+}
+
+.innerContainer ul, .innerContainer ol {
+  margin-top: 10px;
+}
+
+.innerContainer input {
+  background: none;
+  border: 1px solid var(--foreground);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 3px 5px;
+  color: inherit;
+  border-radius: 5px;
+}
+
+.signUp {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.innerContainer button {
+  font-family: inherit;;
+  color: var(--background);
+  font-size: inherit;
+  background-color: var(--foreground);
+  border: none;
+  border-radius: 5px;
+  padding: 3px 5px;
+  cursor: pointer;
+}
+
+.innerContainer button:disabled {
+  cursor: initial;
+  background-color: var(--gray);
+}
+
+.innerContainer .dootImageButton {
+  margin-top: 10px;
+  background: none;
+  background-color: none;
+}
+
+.innerContainer .dootImageButton:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.dootLog {
+  width: 100%;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: scroll;
+  border: 1px solid var(--foreground);
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.dootLog ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.dootLeaderboard {
+  margin-top: 10px;
+}
