@@ -6,12 +6,28 @@ import { getFirestore, collection } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { firebaseApp, logDoot, register } from "./db";
 import { Attendee, Doot } from "./interfaces";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { formatTime, getLeaderboard } from "./util";
 import ShowWhenReady from "./components/ShowWhenReady";
 
 export default function Home() {
   const [name, setName] = useState("");
+
+  useEffect(() => {
+    const cachedName = localStorage.getItem("otgw-name");
+    if (cachedName) {
+      setName(cachedName);
+    }
+  }, []);
+
+  const handleSetName = (newName: string) => {
+    setName(newName);
+    if (newName.trim()) {
+      localStorage.setItem("otgw-name", newName);
+    } else {
+      localStorage.removeItem("otgw-name");
+    }
+  };
   const [attendeesCollection, attendeesLoading, attendeesError] = useCollection(
     collection(getFirestore(firebaseApp), "attendees"),
     {
@@ -106,7 +122,7 @@ export default function Home() {
           <div className={styles.signUp}>
             <input
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => handleSetName(e.target.value)}
               className={styles.nameInput}
               placeholder="name"
             />
