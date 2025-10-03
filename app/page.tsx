@@ -69,9 +69,9 @@ export default function Home() {
           className={styles.headerGif}
         />
         <div className={styles.description}>
-          <h3>What's this?</h3>
+          <h3>What&apos;s this?</h3>
           <i>Over the Garden Wall</i> is a six-episode miniseries that broadcast
-          on Cartoon Network in 2014. It's filled with stunning artwork,
+          on Cartoon Network in 2014. It&apos;s filled with stunning artwork,
           evocative music, and the strongest autumn vibes ever recorded.
         </div>
         <div className={styles.details}>
@@ -83,11 +83,11 @@ export default function Home() {
         </div>
         <div className={styles.bring}>
           <h3>What should I bring?</h3>
-          Nothing required, but fall snacks are more than welcome! I'll also be
-          preparing some hard spiced apple cider for all to enjoy.
+          Nothing required, but fall snacks are more than welcome! I&apos;ll
+          also be preparing some hard spiced apple cider for all to enjoy.
         </div>
         <div className={styles.attendees}>
-          <h3>Who's going?</h3>
+          <h3>Who&apos;s going?</h3>
           <ShowWhenReady
             loading={loading}
             error={Boolean(error)}
@@ -111,7 +111,7 @@ export default function Home() {
               placeholder="name"
             />
             <button onClick={registerCallback} disabled={name.length === 0}>
-              I'm going!
+              I&apos;m going!
             </button>
           </div>
         </div>
