@@ -95,7 +95,7 @@ export default function Home() {
           Come to our residence at 332 Rogers Ave on{" "}
           <b>Saturday, October 25th</b> at <b>6:00 PM</b> to begin watching! The
           whole miniseries is about the length of a movie (~2 hours). Once you
-          arrive, feel free to buzz 062 or just call me.
+          arrive, feel free to buzz 062# or just call me.
         </div>
         <div className={styles.bring}>
           <h3>What should I bring?</h3>
@@ -161,7 +161,7 @@ export default function Home() {
                 errorMessage="couldn't fetch leaderboard!"
               >
                 <ol>
-                  {leaderboard?.map(([name, doots]) => (
+                  {leaderboard?.slice(0, 10).map(([name, doots]) => (
                     <li key={name}>
                       {name} ({doots} {doots === 1 ? "doot" : "doots"})
                     </li>
