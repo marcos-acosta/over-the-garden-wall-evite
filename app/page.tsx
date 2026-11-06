@@ -119,7 +119,7 @@ export default function Home() {
         </div>
         <div>
           <h3>Can I come?</h3>
-          Yes!
+          Sadly no, because the event has passed.
           <div className={styles.signUp}>
             <input
               value={name}
