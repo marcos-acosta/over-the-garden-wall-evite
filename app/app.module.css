@@ -1,6 +1,6 @@
 .appContainer {
   width: 100%;
-  font-family: var(--font-karla);
+  font-family: var(--font-karla), sans-serif;
 }
 
 .headerGif {
@@ -17,7 +17,7 @@
 }
 
 .titleContainer {
-  font-family: var(--font-amarante);
+  font-family: var(--font-amarante), serif;
   width: 100%;
   text-align: center;
   font-weight: bolder;
@@ -43,7 +43,8 @@
   color: var(--red);
 }
 
-.innerContainer ul, .innerContainer ol {
+.innerContainer ul,
+.innerContainer ol {
   margin-top: 10px;
 }
 
@@ -65,7 +66,7 @@
 }
 
 .innerContainer button {
-  font-family: inherit;;
+  font-family: inherit;
   color: var(--background);
   font-size: inherit;
   background-color: var(--foreground);

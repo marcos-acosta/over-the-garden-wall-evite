@@ -32,17 +32,17 @@ export default function Home() {
     collection(getFirestore(firebaseApp), "attendees"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
-    }
+    },
   );
   const [dootsCollection, dootsLoading, dootsError] = useCollection(
     collection(getFirestore(firebaseApp), "doots"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
-    }
+    },
   );
 
   const attendees = attendeesCollection?.docs.map(
-    (doc) => doc.data() as Attendee
+    (doc) => doc.data() as Attendee,
   );
   const doots = dootsCollection?.docs
     .map((doc) => doc.data() as Doot)
@@ -84,27 +84,26 @@ export default function Home() {
           alt="PUMPKIN KING"
           className={styles.headerGif}
         />
-        <div className={styles.description}>
+        <div>
           <h3>What&apos;s this?</h3>
           <i>Over the Garden Wall</i> is a ten-episode miniseries that aired on
           Cartoon Network in 2014. It&apos;s filled with stunning artwork,
           evocative music, and the strongest autumn vibes ever recorded.
         </div>
-        <div className={styles.details}>
+        <div>
           <h3>Where and when?</h3>
-          Come to our residence at 332 Rogers Ave on <b>
+          Come to our residence at [redacted] on <b>
             Sunday, October 26th
-          </b>{" "}
-          at <b>5:00 PM</b> to begin watching! The whole miniseries is about the
-          length of a movie (~2 hours). Once you arrive, feel free to buzz 062#
-          or just call me.
+          </b> at <b>5:00 PM</b> to begin watching! The whole miniseries is
+          about the length of a movie (~2 hours). Once you arrive, feel free to
+          buzz [redacted] or just call me.
         </div>
-        <div className={styles.bring}>
+        <div>
           <h3>What should I bring?</h3>
           Nothing required, but fall snacks are more than welcome! I&apos;ll
           also be preparing some hard spiced apple cider for all to enjoy.
         </div>
-        <div className={styles.attendees}>
+        <div>
           <h3>Who&apos;s going?</h3>
           <ShowWhenReady
             loading={loading}
@@ -118,7 +117,7 @@ export default function Home() {
             </ul>
           </ShowWhenReady>
         </div>
-        <div className={styles.attend}>
+        <div>
           <h3>Can I come?</h3>
           Yes!
           <div className={styles.signUp}>
@@ -172,7 +171,7 @@ export default function Home() {
               </ShowWhenReady>
             </div>
           </div>
-          <div className={styles.why}>
+          <div>
             <h3>Why did you make a website for this?</h3>
             Because I thought it was a fun idea and my capacity for
             prioritization is limited.
